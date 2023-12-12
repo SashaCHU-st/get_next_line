@@ -8,7 +8,6 @@
       "program": "enter program name, for example ${workspaceFolder}/a.out",
       "MIMode": "lldb"
     },
-    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
