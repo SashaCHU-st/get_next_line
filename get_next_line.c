@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/11 16:53:06 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:11:56 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ char	*ft_read(int fd, char *storage)
 	char	*newline;
 
 	new = 0;
-	new = malloc(sizeof(new));// malloc mesto dlya novogo stroki
-	if (!new)
-		return(NULL);
-	while (new != '\n')// esli vsrechaet 
+	newline = malloc(sizeof(newline));// malloc mesto dlya novogo stroki
+	if (!newline)
+		return (NULL);
+	while (newline != '\n')// esli vsrechaet 
 	{
-		new = read(fd, storage, BUFFER_SIZE);/// chitaet v fd po kol-vu BUFFER_SIZE and store in storage 
+		new = read (fd, storage, BUFFER_SIZE);/// chitaet v fd po kol-vu BUFFER_SIZE and store in storage 
 		newline = ft_strjoin(newline, storage);
 		newline[new]= '\0';
 	}
@@ -62,7 +62,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	//s = malloc(sizeof(BUFFER_SIZE + 1));
 	//if (!s)
-///return (NULL);
+	///return (NULL);
 	s = ft_read (fd, s);
 	if (s < 0)
 		return (NULL);
