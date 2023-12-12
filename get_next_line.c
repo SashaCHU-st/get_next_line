@@ -6,14 +6,14 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/12 15:23:17 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:03:49 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
-//#include <unistd.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include "get_next_line.h"
 
@@ -43,9 +43,10 @@ char	*ft_read(int fd, char *storage)
 	while (new > 0 && !ft_strchr(newline, '\n'))// esli vsrechaet '\n'
 	{
 		new = read (fd, storage, BUFFER_SIZE);/// chitaet v fd po kol-vu BUFFER_SIZE and store in storage 
+		storage[new]= '\0';
 		newline = ft_strjoin(newline, storage);
-		newline[new]= '\0';
-		printf ("%c",storage[new]);
+		if(!newline)
+			break;
 	}
 	newline = malloc(sizeof(newline + 1));
 	if (!newline)
@@ -56,6 +57,8 @@ char	*ft_read(int fd, char *storage)
 char	*get_next_line(int fd)
 {
 	static char	*storage;
+	static int i;
+	
 	///char		*new;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -64,8 +67,13 @@ char	*get_next_line(int fd)
 	//if (!s)
 	///return (NULL);
 	storage = ft_read (fd, storage);
-	if (storage < 0)
+	if (!storage)
 		return (NULL);
+	while (storage[i] && storage[i] != '\n')
+	{
+		printf ("%c",storage[i]);
+		i++;
+	}
 	// while (*s != '\n')
 	// {
 	// 	*s++;
