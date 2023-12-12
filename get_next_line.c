@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/12 14:43:38 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:23:17 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,22 @@
 // isppolsuya static variable sohranyaetsy gde zakonchilo i 
 //soedinyaet so sledyushim string do '\n' ft_strjoin
 
-
 char	*ft_read(int fd, char *storage)
 {
 	int		new;
 	char	*newline;
 
 	new = 0;
-	new = malloc(sizeof(new));// malloc mesto dlya novogo stroki
-	if (!new)
+	storage = malloc (BUFFER_SIZE);// malloc mesto dlya novogo stroki
+	if (!storage)
 		return (NULL);
-	while (new > 0 && !ft_strchr(newline, '\n'))// esli vsrechaet 
+	while (new > 0 && !ft_strchr(newline, '\n'))// esli vsrechaet '\n'
 	{
 		new = read (fd, storage, BUFFER_SIZE);/// chitaet v fd po kol-vu BUFFER_SIZE and store in storage 
 		newline = ft_strjoin(newline, storage);
+		newline[new]= '\0';
+		printf ("%c",storage[new]);
 	}
-	newline[new]= '\0';
 	newline = malloc(sizeof(newline + 1));
 	if (!newline)
 		return (NULL);
@@ -55,7 +55,7 @@ char	*ft_read(int fd, char *storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*s;
+	static char	*storage;
 	///char		*new;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -63,8 +63,8 @@ char	*get_next_line(int fd)
 	//s = malloc(sizeof(BUFFER_SIZE + 1));
 	//if (!s)
 	///return (NULL);
-	s = ft_read (fd, s);
-	if (s < 0)
+	storage = ft_read (fd, storage);
+	if (storage < 0)
 		return (NULL);
 	// while (*s != '\n')
 	// {
@@ -72,8 +72,8 @@ char	*get_next_line(int fd)
 	// }
 	// s = ft_strjoin(s, BUFFER_SIZE);
 	// s = malloc (sizeof(s));
-	free(s);
-	return(s);
+	free(storage);
+	return(storage);
 }
 int main ()
 {
