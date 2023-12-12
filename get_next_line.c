@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/12 14:11:56 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:43:38 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ char	*ft_read(int fd, char *storage)
 	char	*newline;
 
 	new = 0;
-	newline = malloc(sizeof(newline));// malloc mesto dlya novogo stroki
-	if (!newline)
+	new = malloc(sizeof(new));// malloc mesto dlya novogo stroki
+	if (!new)
 		return (NULL);
-	while (newline != '\n')// esli vsrechaet 
+	while (new > 0 && !ft_strchr(newline, '\n'))// esli vsrechaet 
 	{
 		new = read (fd, storage, BUFFER_SIZE);/// chitaet v fd po kol-vu BUFFER_SIZE and store in storage 
 		newline = ft_strjoin(newline, storage);
-		newline[new]= '\0';
 	}
+	newline[new]= '\0';
 	newline = malloc(sizeof(newline + 1));
 	if (!newline)
 		return (NULL);
@@ -56,7 +56,7 @@ char	*ft_read(int fd, char *storage)
 char	*get_next_line(int fd)
 {
 	static char	*s;
-	char		*new;
+	///char		*new;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -66,10 +66,10 @@ char	*get_next_line(int fd)
 	s = ft_read (fd, s);
 	if (s < 0)
 		return (NULL);
-	while (*s != '\n')
-	{
-		*s++;
-	}
+	// while (*s != '\n')
+	// {
+	// 	*s++;
+	// }
 	// s = ft_strjoin(s, BUFFER_SIZE);
 	// s = malloc (sizeof(s));
 	free(s);

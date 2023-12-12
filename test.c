@@ -64,7 +64,7 @@ char *test(int fd)
 	}
 	line = ft_strjoin(line, buffer);
 	printf("\n");
-	return (buffer);
+	return (line);
 }
 
 int main ()
