@@ -1,4 +1,2 @@
-helloooo
-moikaaaa
-privet222222
-333333 333333
+hello
+world
