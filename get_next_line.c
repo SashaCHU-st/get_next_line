@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/13 16:56:30 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:02:52 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,25 @@ char	*ft_read(int fd, char *storage)
 			break ;
 		buffer[bytes_read]= '\0';
 		storage = ft_strjoin(storage, buffer);
-		//printf("hello\n");
 	}
 	printf(" storage %s \n", storage);
 	return (storage);
 }
+char *next_spot(storage)
+{
+	
+}
 
 char *get_line(char *storage)
 {
-	
+	char *temp;
+	int i;
+	while (!ft_strchr(storage, '\n'))
+	{
+		temp[i]= storage[i];
+		i++;
+	}
+	return(temp);
 }
 
 
@@ -63,7 +73,7 @@ char	*get_next_line(int fd)
 	storage = ft_read(fd, storage);
 	if (!storage)
 		return (NULL);
-	printf("storage %s\n", storage);	
+	//printf ("storage %s\n", storage);
 	line = get_line(storage);
 	next_spot(storage);
 	//free(storage);
