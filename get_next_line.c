@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/13 17:06:51 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:11:41 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int main ()
 {
 	int fd;
 	fd = open("test_delete.txt", O_RDONLY);
-	char *line = get_next_line(fd);
+	//char *line = get_next_line(fd);
+	get_next_line(fd);
 	//printf("%s\n", line);
 	//get_next_line(fd);
 	///	get_next_line(fd);
