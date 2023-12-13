@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/13 17:04:37 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:06:51 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*get_next_line(int fd)
 	//printf ("storage %s\n", storage);
 	line = get_line(storage);
 	next_spot(storage);
-	//free(storage);
+	free(storage);
 	return(storage);
 }
 int main ()
