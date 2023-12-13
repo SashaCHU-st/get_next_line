@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/13 14:42:38 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:55:27 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ char	*ft_read(int fd, char *storage)
 	printf(" storage %s \n", storage);
 	return (storage);
 }
+
+
+
 char *get_line(char *storage)
 {
 	
