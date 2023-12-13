@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/13 17:02:52 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:04:37 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@
 char	*ft_read(int fd, char *storage)
 {
 	char	buffer[BUFFER_SIZE + 1];
-	int		bytes_read = 0;
+	int		how_many_bytes = 0;
 	while (1)// esli vstrechaet '\n'
 	{
-		bytes_read = read (fd, buffer, BUFFER_SIZE);/// chitaet v fd po kol-vu BUFFER_SIZE and store in storage 
-		if (bytes_read <= 0)
+		how_many_bytes = read (fd, buffer, BUFFER_SIZE);/// chitaet v fd po kol-vu BUFFER_SIZE and store in storage 
+		if (how_many_bytes <= 0)
 			break ;
-		buffer[bytes_read]= '\0';
+		buffer[how_many_bytes]= '\0';
 		storage = ft_strjoin(storage, buffer);
 	}
 	printf(" storage %s \n", storage);
