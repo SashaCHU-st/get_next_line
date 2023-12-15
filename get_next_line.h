@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:52:59 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/15 15:30:56 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/15 16:38:36 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# ifndef BUFFER_SIZE
+# git ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
 char	*get_next_line(int fd);
 char	*ft_read(int fd, char *storage);
 size_t	ft_strlen(const char *str );

@@ -6,12 +6,13 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:51:09 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/15 15:39:25 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/15 16:37:55 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
+
 size_t	ft_strlen(const char *str )
 {
 	size_t	i;
@@ -28,6 +29,7 @@ size_t	ft_strlen(const char *str )
 	}
 	return (count);
 }
+
 char	*ft_strdup(const char *src)
 {
 	size_t	i;
@@ -73,6 +75,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	dst[i] = '\0';
 	return (j);
 }
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*p;
@@ -89,7 +92,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_strlcpy(p, s + start, len + 1);
 	return (p);
 }
-
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -117,6 +119,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new[i + j] = '\0';
 	return (new);
 }
+
 char	*ft_strchr(char *s, int c)
 {
 	while (*s != '\0')
