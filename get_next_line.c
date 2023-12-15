@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/13 17:11:41 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/15 13:22:00 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,42 @@
 
 // isppolsuya static variable sohranyaetsy gde zakonchilo i 
 //soedinyaet so sledyushim string do '\n' ft_strjoin
+char *ft_get_line(char *storage)
+{
+	char *temp;
+	int i = 0;
 
+	temp = malloc(ft_strlen(storage) + 1); // Allocate memory for temp
+    if (!temp)
+        return NULL;
+	//while (!ft_strchr(storage, '\n'))
+	while (storage[i] && storage[i] != '\n')
+	{
+		//printf(" HELLO\n");
+		temp[i] = storage[i];
+		i++;
+	}
+	temp[i++] = '\n';
+	temp[i] = '\0';
+	return(temp);
+}
 char	*ft_read(int fd, char *storage)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	int		how_many_bytes = 0;
-	while (1)// esli vstrechaet '\n'
+	while (1)
 	{
 		how_many_bytes = read (fd, buffer, BUFFER_SIZE);/// chitaet v fd po kol-vu BUFFER_SIZE and store in storage 
-		if (how_many_bytes <= 0)
+		if (how_many_bytes <= 0 && !ft_strchr(buffer, '\n'))
 			break ;
 		buffer[how_many_bytes]= '\0';
 		storage = ft_strjoin(storage, buffer);
 	}
-	printf(" storage %s \n", storage);
+	//printf(" storage %s \n", storage);
 	return (storage);
 }
-char *next_spot(storage)
-{
-	
-}
 
-char *get_line(char *storage)
-{
-	char *temp;
-	int i;
-	while (!ft_strchr(storage, '\n'))
-	{
-		temp[i]= storage[i];
-		i++;
-	}
-	return(temp);
-}
+
 
 
 char	*get_next_line(int fd)
@@ -74,20 +78,20 @@ char	*get_next_line(int fd)
 	if (!storage)
 		return (NULL);
 	//printf ("storage %s\n", storage);
-	line = get_line(storage);
-	next_spot(storage);
-	free(storage);
-	return(storage);
+	line = ft_get_line(storage);
+	//next_spot(storage);
+	//free(storage);
+	return(line);
 }
-int main ()
-{
-	int fd;
-	fd = open("test_delete.txt", O_RDONLY);
-	//char *line = get_next_line(fd);
-	get_next_line(fd);
-	//printf("%s\n", line);
-	//get_next_line(fd);
-	///	get_next_line(fd);
-	close(fd);
-	return (0);
-}
+// int main ()
+// {
+// 	int fd;
+// 	fd = open("test_delete.txt", O_RDONLY);
+// 	//char *line = get_next_line(fd);
+// 	printf("%s",get_next_line(fd));
+// 	//printf("%s\n", line);
+// 	//get_next_line(fd);
+// 	///	get_next_line(fd);
+// 	close(fd);
+// 	return (0);
+// }
