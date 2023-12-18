@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/15 16:38:11 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:09:09 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*ft_get_line(char *storage)
 		temp[i] = storage[i];
 		i++;
 	}
+	// free(*storage);
+	// *storage = temp;
 	temp[i++] = '\n';
 	temp[i] = '\0';
 	return (temp);
@@ -65,6 +67,7 @@ char	*ft_read(int fd, char *storage)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	int		how_many_bytes;
+	char	*temp;
 
 	how_many_bytes = 0;
 	while (1)
@@ -73,7 +76,10 @@ char	*ft_read(int fd, char *storage)
 		if (how_many_bytes <= 0 && !ft_strchr(buffer, '\n'))
 			break ;
 		buffer [how_many_bytes] = '\0';
+		temp = storage;
 		storage = ft_strjoin(storage, buffer);
+		free(temp);
+		free(buffer);
 	}
 	return (storage);
 }
@@ -96,10 +102,20 @@ char	*get_next_line(int fd)
 // int main ()
 // {
 // 	int fd;
+// 	char	*line;
 // 	fd = open("test_delete.txt", O_RDONLY);
 // 	//char *line = get_next_line(fd);
-// 	printf("%s",get_next_line(fd));
-// 	printf("%s",get_next_line(fd));
+// 	line = get_next_line(fd);
+// 	printf("%s",line);
+// 	free(line);
+
+// 	line = get_next_line(fd);
+// 	printf("%s",line);
+// 	free(line);
+
+// 	line = get_next_line(fd);
+// 	printf("%s",line);
+// 	free(line);
 // 	//printf("%s\n", line);
 // 	//get_next_line(fd);
 // 	///	get_next_line(fd);

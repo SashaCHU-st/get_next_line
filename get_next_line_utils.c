@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:51:09 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/15 16:37:55 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:04:22 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,29 @@ size_t	ft_strlen(const char *str )
 	return (count);
 }
 
-char	*ft_strdup(const char *src)
-{
-	size_t	i;
-	size_t	j;
-	char	*copy;
+// char	*ft_strdup(const char *src)
+// {
+// 	size_t	i;
+// 	size_t	j;
+// 	char	*copy;
 
-	i = 0;
-	j = 0;
-	while (src[j] != '\0')
-	{
-		j++;
-	}
-	copy = (char *) malloc((j + 1) * sizeof(char));
-	if (copy == 0)
-		return (0);
-	while (src[i])
-	{
-		copy[i] = src[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (src[j] != '\0')
+// 	{
+// 		j++;
+// 	}
+// 	copy = (char *) malloc((j + 1) * sizeof(char));
+// 	if (copy == 0)
+// 		return (0);
+// 	while (src[i])
+// 	{
+// 		copy[i] = src[i];
+// 		i++;
+// 	}
+// 	copy[i] = '\0';
+// 	return (copy);
+// }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -83,7 +83,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
-		return (ft_strdup(""));
+		return ("");
 	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
 	p = (char *)malloc(sizeof(char) * (len + 1));
