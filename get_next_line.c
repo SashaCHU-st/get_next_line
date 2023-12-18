@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/18 14:09:09 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:13:50 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ char	*ft_get_line(char *storage)
 		temp[i] = storage[i];
 		i++;
 	}
-	// free(*storage);
-	// *storage = temp;
 	temp[i++] = '\n';
 	temp[i] = '\0';
 	return (temp);
