@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/18 17:09:39 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:17:45 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ char	*next_spot(char *storage)
 	while (storage[i] && storage[i] != '\n')
 		i++;
 	next_spot = ft_substr(storage, i + 1, ft_strlen(ft_strchr(storage, '\n')));
+	if (!next_spot)
+	{
+		free (storage);
+		return (NULL);
+	}
 	return (next_spot);
 }
 
@@ -51,12 +56,14 @@ char	*ft_get_line(char *storage)
 	temp = malloc(ft_strlen(storage) + 1);
 	if (!temp)
 		return (NULL);
-	while (storage[i] && storage[i] != '\n')
+	while ((storage[i]) && storage[i] != '\n')
 	{
 		temp[i] = storage[i];
 		i++;
 	}
-	temp[i++] = '\n';
+	
+	if (storage[i] == '\n')
+		temp[i++] = '\n';
 	temp[i] = '\0';
 	return (temp);
 }
@@ -67,18 +74,25 @@ char	*ft_read(int fd, char *storage)
 	int		how_many_bytes;
 	char	*temp;
 
-	how_many_bytes = 0;
-	while (1)
+	how_many_bytes = 1;
+	while (how_many_bytes > 0)
 	{
 		how_many_bytes = read (fd, buffer, BUFFER_SIZE);
-		if (how_many_bytes <= 0 && !ft_strchr(buffer, '\n'))
+		if (how_many_bytes  <= 0 && !ft_strchr(buffer, '\n'))
 			break ;
 		buffer [how_many_bytes] = '\0';
+		if (!storage)
+			storage = ft_strdup("");
 		temp = storage;
 		storage = ft_strjoin(storage, buffer);
 		free(temp);
-		//free(buffer);
+		if (!storage)
+		{
+			free(temp);
+			free (buffer);
+		}
 	}
+	//free(buffer);
 	return (storage);
 }
 
@@ -90,10 +104,10 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	storage = ft_read(fd, storage);
-	if (!storage)
+	if (!storage || !*storage)
 		return (NULL);
 	line = ft_get_line(storage);
-	free(storage);
+	//free(storage);
 	storage = next_spot(storage);
 	if (!line && !storage)
 	{
@@ -104,15 +118,46 @@ char	*get_next_line(int fd)
 }
 // int main ()
 // {
-// 	int fd;
+// 	// char	*line;
+// 	//int		i = 1;
+// 	int		fd;
+
 // 	fd = open("test_delete.txt", O_RDONLY);
-// 	//char *line = get_next_line(fd);
+	
 // 	printf("%s",get_next_line(fd));
-// 	printf("%s",get_next_line(fd));
-// 	printf("%s",get_next_line(fd));
-// 	printf("%s",get_next_line(fd));
-// 	printf("%s",get_next_line(fd));
-// 	printf("%s",get_next_line(fd));
+// 	printf("%s",get_next_line(fd)); 
+// 	// printf("%s",get_next_line(fd));
+// 	// printf("%s",get_next_line(fd));
+// 	// printf("%s",get_next_line(fd));
+// 	// printf("%s",get_next_line(fd));
+	
+// 	char *line = get_next_line(fd);
+// 	line =get_next_line(fd);
+// 	 printf("%s",line);
+// 	 free(line);
+// 	printf("%s",line);
+// 	free(line);
+// 	printf("%s",line);
+// 	free(line);
+// 	printf("%s",line);
+// 	free(line);
+// 	printf("%s",line);
+// 	free(line);
+// 	printf("%s",line);
+// 	free(line);
+	
+// 	//line =get_next_line(fd);
+// 	// printf("%s",get_next_line(fd));
+// 	// printf("%s",get_next_line(fd));
+// 	// printf("%s",get_next_line(fd));
+// 	// printf("%s",get_next_line(fd));
+// 	// printf("%s",get_next_line(fd));
+// 	// printf("%s",get_next_line(fd));
+// 	// 	while ((line = get_next_line(fd)))
+// 	// {
+// 	// 	printf("%d->%s", i++, line);
+// 	// 	free(line);
+// 	// }
 // 	//printf("%s\n", line);
 // 	//get_next_line(fd);
 // 	///	get_next_line(fd);
