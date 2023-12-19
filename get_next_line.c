@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/19 18:29:24 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:03:54 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*next_spot(char *storage)
 		free (next_spot);
 		return (NULL);
 	}
-	if(!next_spot[0])
+	if (!next_spot[0])
 	{
 		free(storage);
 		free(next_spot);
@@ -106,7 +106,6 @@ char	*get_next_line(int fd)
 	if (!storage || !*storage)
 		return (NULL);
 	line = ft_get_line(storage);
-	//free(storage);
 	storage = next_spot(storage);
 	if (!line && !storage)
 	{
