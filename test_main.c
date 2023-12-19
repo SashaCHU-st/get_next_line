@@ -7,20 +7,35 @@
 
 
 
-int main (int argc, char **argv)
+int main ()
 {
-	//char	*line;
-	//int		i = 1;
+	
 	int		fd;
 
-	fd = open(argv[1], O_RDONLY);
+	fd = open("test_delete.txt", O_RDONLY);
 
-	printf("->%s<-",get_next_line(fd));
-	printf("->%s<-\n",get_next_line(fd));
-    printf("->%s<-",get_next_line(fd));
-    printf("->%s<-\n",get_next_line(fd));
-    printf("->%s<-",get_next_line(fd));
-    printf("->%s<-\n",get_next_line(fd));
+	// printf("%s",get_next_line(fd));
+	// printf("%s",get_next_line(fd));
+    // printf("%s",get_next_line(fd));
+    // printf("%s",get_next_line(fd));
+	// printf("%s",get_next_line(fd));
+    // printf("%s",get_next_line(fd));
+    // // printf("->%s<-",get_next_line(fd));
+    // // printf("->%s<-\n",get_next_line(fd));
+	// // printf("->%s<-",get_next_line(fd));
+	// // printf("->%s<-\n",get_next_line(fd));
+    // // printf("->%s<-",get_next_line(fd));
+    // // printf("->%s<-\n",get_next_line(fd));
+    // // printf("->%s<-",get_next_line(fd));
+    // // printf("->%s<-\n",get_next_line(fd));
+
+char	*line;
+	int		i = 1;
+	while ((line = get_next_line(fd)))
+	{
+	 	printf("%d->%s", i++, line);
+	 	free(line);
+	 }
 
 	close(fd);
 	return (0);
