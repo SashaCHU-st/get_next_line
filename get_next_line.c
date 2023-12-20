@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/20 12:08:33 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:06:52 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ char	*ft_read(int fd, char *storage)
 	while (how_many_bytes > 0)
 	{
 		how_many_bytes = read (fd, buffer, BUFFER_SIZE);
+		if (how_many_bytes == -1)
+		{
+			free(storage);
+			return (NULL);
+		}
 		if (how_many_bytes <= 0 && !ft_strchr(buffer, '\n'))
 			break ;
 		buffer [how_many_bytes] = '\0';
@@ -91,7 +96,6 @@ char	*ft_read(int fd, char *storage)
 			free (buffer);
 		}
 	}
-	//free(buffer); 
 	return (storage);
 }
 
