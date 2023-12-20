@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/19 19:03:54 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:08:33 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*ft_read(int fd, char *storage)
 			free (buffer);
 		}
 	}
-	//free(buffer);
+	//free(buffer); 
 	return (storage);
 }
 
