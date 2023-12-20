@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/20 14:54:52 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:21:45 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ char	*ft_get_line(char *storage)
 	i = 0;
 	while (storage[i] && storage[i] != '\n')
 		i++;
-	temp = malloc(i + 2);
+	if (storage[i] != '\n')
+		temp = malloc(i + 1);
+	else
+		temp = malloc(i + 2);
 	i = 0;
 	if (!temp)
 		return (NULL);
@@ -65,7 +68,6 @@ char	*ft_get_line(char *storage)
 		temp[i] = storage[i];
 		i++;
 	}
-	//	temp[i++] = '\n';,hjftl;lkftllk
 	temp[i] = '\0';
 	return (temp);
 }
@@ -116,8 +118,8 @@ char	*get_next_line(int fd)
 	storage = next_spot(storage);
 	if (!line && !storage)
 	{
-		free (storage); 
-		storage = NULL; 
+		free(storage);
+		storage = NULL;
 	}
 	return (line);
 }
