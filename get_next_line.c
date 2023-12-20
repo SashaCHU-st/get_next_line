@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/20 13:06:52 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:57:44 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ char	*ft_get_line(char *storage)
 	int		i;
 
 	i = 0;
-	temp = malloc(ft_strlen(storage) + 1);
+	while (storage[i] && storage[i] != '\n')
+		i++;
+	temp = malloc(i + 2);
+	i = 0;
 	if (!temp)
 		return (NULL);
 	while (storage[i] && storage[i] != '\n')
