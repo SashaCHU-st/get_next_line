@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/21 12:38:49 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:43:14 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ char	*next_spot(char *storage)
 
 	i = 0;
 	if (storage[i] == '\0')
-		return (free(storage), NULL);
+	{
+		free(storage);
+		return (NULL);
+	}
 	while (storage[i] && storage[i] != '\n')
 		i++;
 	next_spot = ft_substr(storage, i + 1, ft_strlen(ft_strchr(storage, '\n')));
