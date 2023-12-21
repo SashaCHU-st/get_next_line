@@ -9,10 +9,10 @@
 
 int main ()
 {
-	char	test[5];
+	//char	test[5];
 	int		fd;
 
-// 	fd = open("test_delete.txt", O_RDONLY);
+fd = open("test_delete.txt", O_RDONLY);
 
 // 	printf("%s",get_next_line(fd));
 // 	printf("%s",get_next_line(fd));
