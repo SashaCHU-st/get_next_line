@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/20 15:21:45 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:38:49 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char	*ft_read(int fd, char *storage)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	int		how_many_bytes;
-	char	*temp;
 
 	how_many_bytes = 1;
 	while (how_many_bytes > 0)
@@ -92,14 +91,9 @@ char	*ft_read(int fd, char *storage)
 		buffer [how_many_bytes] = '\0';
 		if (!storage)
 			storage = ft_strdup("");
-		temp = storage;
 		storage = ft_strjoin(storage, buffer);
-		free(temp);
 		if (!storage)
-		{
-			free(temp);
-			free (buffer);
-		}
+			return (NULL);
 	}
 	return (storage);
 }
