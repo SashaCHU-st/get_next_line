@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/27 17:19:30 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:32:04 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_exist(char *str)
 {
@@ -106,20 +106,20 @@ char	*ft_read(int fd, char *storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage;
+	static char	*storage[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read (fd, 0, 0) < 0)
-		return (free_function(&storage));
-	storage = ft_read(fd, storage);
-	if (!storage)
+		return (free_function(&storage[fd]));
+	storage[fd] = ft_read(fd, storage[fd]);
+	if (!storage[fd])
 		return (NULL);
-	line = ft_get_line(storage);
-	storage = next_spot(storage);
-	if (!line || !storage)
+	line = ft_get_line(storage[fd]);
+	storage[fd] = next_spot(storage[fd]);
+	if (!line || !storage[fd])
 	{
-		free(storage);
-		storage = NULL;
+		free(storage[fd]);
+		storage[fd] = NULL;
 	}
 	return (line);
 }
