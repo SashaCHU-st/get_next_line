@@ -6,24 +6,22 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/21 21:18:22 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:08:37 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
 #include "get_next_line.h"
 
-char free_function (char **str)
+char	*ft_exist(char *str)
 {
-	if (!*str)
-		return(0);
-	free(*str);
-	*str = NULL;
-	return(0);
+	if (!str)
+	{
+		str = malloc(1);
+		if (!str)
+			return (0);
+		*str = 0;
+	}
+	return (str);
 }
 
 char	*next_spot(char *storage)
@@ -38,36 +36,28 @@ char	*next_spot(char *storage)
 		i++;
 	if (storage[i] == '\0')
 	{
-		free_function(&storage);
-		return(NULL);
-	}
-	next_spot = ft_substr(storage, i + 1, ft_strlen(ft_strchr(storage, '\n')));
-	if (!next_spot)
-	{
-		free_function(&storage);
-		//free_function(next_spot);
+		free(storage);
 		return (NULL);
 	}
+	next_spot = malloc(sizeof(char) * ft_strlen(storage) - i + 1);
+	if (!next_spot)
+		return (free_function(&storage));
 	i++;
 	while (storage[i])
 		next_spot[nextspot_index++] = storage[i++];
-	if (!next_spot[0])
-	{
-		free_function(&storage);
-		free_function(&next_spot);
-		//free(next_spot);
-		return (NULL);
-	}
+	next_spot[nextspot_index] = '\0';
 	free (storage);
 	return (next_spot);
 }
 
 char	*ft_get_line(char *storage)
 {
-char	*temp;
+	char	*temp;
 	int		i;
 
 	i = 0;
+	if (!storage[i])
+		return (NULL);
 	while (storage[i] && storage[i] != '\n')
 		i++;
 	if (storage[i] != '\n')
@@ -83,37 +73,34 @@ char	*temp;
 		i++;
 	}
 	if (storage[i] && storage[i] == '\n')
-	{
-		temp[i] = storage[i];
-		i++;
-	}
+		temp[i++] = '\n';
 	temp[i] = '\0';
 	return (temp);
 }
 
 char	*ft_read(int fd, char *storage)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	int		how_many_bytes;
-	char	*temp;
 
+	storage = ft_exist(storage);
+	if (!storage)
+		return (0);
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (free_function(&storage));
 	how_many_bytes = 1;
-	while (how_many_bytes > 0)
+	while (how_many_bytes > 0 && !ft_strchr(storage, '\n'))
 	{
 		how_many_bytes = read (fd, buffer, BUFFER_SIZE);
 		if (how_many_bytes == -1)
-			return (free(storage), NULL);
-		else if (how_many_bytes == 0)
-			break ;
+			return (NULL);
 		buffer[how_many_bytes] = '\0';
-		temp = ft_strjoin(storage, buffer);
-		if (!temp)
-			return (free(storage), NULL);
-		free(storage);
-		storage = temp;
-		if (ft_strchr(buffer, '\n'))
-			break ;
+		storage = ft_strjoin(storage, buffer);
+		if (!storage)
+			return (free_function(&storage));
 	}
+	free(buffer);
 	return (storage);
 }
 
@@ -122,27 +109,17 @@ char	*get_next_line(int fd)
 	static char	*storage = NULL;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read (fd, 0, 0) < 0)
+		return (free_function(&storage));
+	storage = ft_read(fd, storage);
 	if (!storage)
-		storage = calloc(1, 1);
-	if (!storage)
-		return (free(storage), NULL);
-	if (!ft_strchr(storage, '\n'))
-		storage = ft_read(fd, storage);
-	if (!storage || !*storage)
 		return (NULL);
 	line = ft_get_line(storage);
-	// if (!line)
-	// 	{
-	// 	free_function(storage);
-	// 	return (NULL);
-	// 	}
 	storage = next_spot(storage);
-	// if (!line && !storage)
-	// {
-	// 	free_function(storage);
-	// 	return(NULL);
-	// }
+	if (!line || !storage)
+	{
+		free(storage);
+		storage = NULL;
+	}
 	return (line);
 }
