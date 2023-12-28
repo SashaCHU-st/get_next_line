@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/27 17:19:30 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/28 10:08:35 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_exist(char *str)
 	{
 		str = malloc(1);
 		if (!str)
-			return (0);
+			return (NULL);
 		*str = 0;
 	}
 	return (str);
@@ -85,7 +85,7 @@ char	*ft_read(int fd, char *storage)
 
 	storage = ft_exist(storage);
 	if (!storage)
-		return (0);
+		return (NULL);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (free_function(&storage));
@@ -94,7 +94,7 @@ char	*ft_read(int fd, char *storage)
 	{
 		how_many_bytes = read (fd, buffer, BUFFER_SIZE);
 		if (how_many_bytes == -1)
-			return (NULL);
+			return (free_function(&storage));
 		buffer[how_many_bytes] = '\0';
 		storage = ft_strjoin(storage, buffer);
 		if (!storage)
@@ -113,7 +113,7 @@ char	*get_next_line(int fd)
 		return (free_function(&storage));
 	storage = ft_read(fd, storage);
 	if (!storage)
-		return (NULL);
+		return (free_function(&storage));
 	line = ft_get_line(storage);
 	storage = next_spot(storage);
 	if (!line || !storage)
