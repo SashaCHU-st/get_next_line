@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:49:53 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/28 11:44:28 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:03:49 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	*get_next_line(int fd)
 		return (free_function(&storage[fd]));
 	storage[fd] = ft_read(fd, storage[fd]);
 	if (!storage[fd])
-		return (free_function(&storage));
+		return (free_function(&storage[fd]));
 	line = ft_get_line(storage[fd]);
 	storage[fd] = next_spot(storage[fd]);
 	if (!line || !storage[fd])

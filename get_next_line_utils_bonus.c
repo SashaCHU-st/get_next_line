@@ -6,7 +6,7 @@
 /*   By: aheinane <aheinane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:51:09 by aheinane          #+#    #+#             */
-/*   Updated: 2023/12/27 17:27:21 by aheinane         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:15:51 by aheinane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	new = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
 	if (!new)
-		return (free_function(&s1), free_function(&s2));
+	{
+		free_function(&s1);
+		free_function(&s2);
+		return (NULL);
+	}
 	while (s1[i] != '\0')
 	{
 		new[i] = s1[i];
